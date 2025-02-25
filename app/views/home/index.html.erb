@@ -1,7 +1,9 @@
 <div class="flex justify-center text-center py-10">
   <div>
-    <h1 class="text-5xl">RailsLabs</h1>
-    <p class="text-2xl">The time is now: <%= Time.now %></p>
+    <h1 class="text-5xl">Rails-Labs 🔭</h1>
+    <p class="text-2xl">
+      <%= Time.now.strftime("%d %B %Y - %H:%M:%S") %>
+    </p>
   </div>
 </div>
 
@@ -29,4 +31,17 @@
       </p>
     </div>
   <% end %>
+
+  <%= link_to api_v1_tasks_path do %>
+<div class="p-6 border rounded-lg shadow hover:shadow-lg transition-all hover:translate-y-[-10px]">
+  <h2 class="text-xl font-bold mb-2">Tasks API Module ⚙️</h2>
+  <p class="text-gray-600">
+    - List Tasks<br>
+    - Create Tasks<br>
+    - Update Tasks<br>
+    - Delete Tasks<br>
+    - RESTful API Endpoints
+  </p>
+</div>
+<% end %>
 </div>
