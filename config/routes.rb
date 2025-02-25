@@ -29,4 +29,10 @@ Rails.application.routes.draw do
     root to: "dashboard#index"
     resources :users
   end
+
+  namespace :api do
+    namespace :v1 do
+      resources :tasks
+    end
+  end
 end
