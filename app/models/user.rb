@@ -1,14 +1,33 @@
 class User < ApplicationRecord
   has_secure_password
-
   has_many :chatbot_conversations, class_name: "Chatbot::Conversation"
-
+  has_many :api_tokens, dependent: :destroy
+  has_many :tasks, dependent: :destroy
   # Définition de l'enum pour les rôles
   enum :role, { user: 0, admin: 1 }
-
   validates :email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }, uniqueness: true
   normalizes :email, with: ->(email) { email.strip.downcase }
   validate :prevent_admin_role_change
+
+  # Méthode pour générer un nouveau token API
+  def generate_api_token(expires_in = 30.days)
+    # Révoquer tous les tokens existants avant d'en générer un nouveau
+    revoke_all_api_tokens
+
+    # Créer un nouveau token à chaque appel
+    token, raw_token = ApiToken.create_for_user(self, expires_in)
+    [ token, raw_token ]
+  end
+
+  # Révoquer tous les tokens existants
+  def revoke_all_api_tokens
+    self.api_tokens.destroy_all
+  end
+
+  # Méthode pour vérifier l'accès API
+  def api_authorized?
+    admin? || user?
+  end
 
   def self.human_attribute_name(attribute, *args)
     case attribute.to_sym
