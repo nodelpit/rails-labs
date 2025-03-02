@@ -1,5 +1,7 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
+require 'timecop'
+
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
 # Prevent database truncation if the environment is production
@@ -78,4 +80,9 @@ RSpec.configure do |config|
   config.before(:each) do
     ActiveJob::Base.queue_adapter = :test
   end
+
+  # Inclusion des méthodes FactoryBot
+  config.include FactoryBot::Syntax::Methods
+
+  config.include ActiveSupport::Testing::TimeHelpers
 end

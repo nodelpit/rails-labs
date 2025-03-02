@@ -32,12 +32,13 @@ class ApiToken < ApplicationRecord
     return nil if raw_token.blank?
 
     hashed_token = hash_token(raw_token)
-    token = valid.find_by(token: hashed_token)
+    token = where("token = ? AND expires_at > ?", hashed_token, Time.current).first
 
     if token
-      # Met à jour la date de dernière utilisation
       token.update_column(:last_used_at, Time.current)
       token.user
+    else
+      nil
     end
   end
 

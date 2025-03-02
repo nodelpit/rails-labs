@@ -9,7 +9,15 @@ fr:
     errors:
       messages:
         record_invalid: "La validation a échoué : %{errors}"
+        taken: "a déjà été utilisé"
       models:
+        api_token:
+          attributes:
+            token:
+              blank: "Le token ne peut pas être vide"
+              taken: "Ce token a déjà été utilisé"
+            expires_at:
+              blank: "La date d'expiration ne peut pas être vide"
         user:
           attributes:
             # Validation d'email
