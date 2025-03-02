@@ -12,19 +12,22 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "home#index"
 
+  # Routes pour l'authentification
   namespace :auth do
-    resource :registration
-    resource :session
-    resource :password_reset
-    resource :password
+    resource :registration, only: [ :new, :create, :edit, :update, :destroy ]
+    resource :session, only: [ :new, :create, :destroy ]
+    resource :password_reset, only: [ :new, :create, :edit, :update ]
+    resource :password, only: [ :edit, :update ]
   end
 
+  # Routes pour le chatbot
   namespace :chatbot do
-    resources :conversations do
-      resources :messages
+    resources :conversations, except: [ :edit, :update ] do
+      resources :messages, except: [ :edit, :update ]
     end
   end
 
+  # Routes pour l'administration
   namespace :admin do
     root to: "dashboard#index"
     resources :users
@@ -32,7 +35,12 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :tasks
+      # Routes d'authentification API
+      post "token", to: "tokens#create"
+      delete "token", to: "tokens#destroy"
+
+      # Routes de tâches API (sans new et edit qui sont inutiles en API)
+      resources :tasks, except: [ :new, :edit ]
     end
   end
 end

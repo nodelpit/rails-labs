@@ -46,6 +46,13 @@ module Auth
       reset_session
       session[:user_id] = user.id
 
+      # Révoquer tous les tokens existants et générer un nouveau token
+      user.revoke_all_api_tokens
+      _, raw_token = user.generate_api_token
+
+      # Stocker le nouveau token dans la session
+      session[:api_token] = raw_token
+
       # Gérer le cookie "Remember me" si l'option est cochée
       if params[:remember_me] == "1"
         cookies.encrypted[:remember_user_token] = {
