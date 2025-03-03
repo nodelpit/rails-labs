@@ -61,7 +61,7 @@ RSpec.describe User, type: :model do
     # Vérifie le format et la validité du token généré
     it "retourne un token valide" do
       token_record, raw_token = user.generate_api_token
-      expect(token_record).to be_a(ApiToken)
+      expect(token_record).to be_a(Api::Token)
       expect(raw_token).to be_a(String)
       expect(raw_token.length).to eq(64) # 32 octets = 64 caractères hexadécimaux
     end

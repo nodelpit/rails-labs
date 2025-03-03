@@ -4,7 +4,7 @@ class Api::V1::TokensController < Api::V1::BaseController
   def create
     user = User.find_by(email: params[:email])
     if user&.authenticate(params[:password])
-      _, raw_token = user.generate_api_token
+      _, raw_token = user.generate_api_token()
       render json: { api_token: raw_token, expires_in: 30.days.to_i }, status: :created
     else
       render json: { error: "Invalid credentials" }, status: :unauthorized

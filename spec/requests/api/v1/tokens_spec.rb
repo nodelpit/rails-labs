@@ -28,7 +28,7 @@ RSpec.describe "Api::V1::Tokens", type: :request do
         post api_v1_token_path, params: valid_credentials
 
         # Vérifier que le token précédent a été révoqué
-        expect(ApiToken.find_by(token: old_token_hash)).to be_nil
+        expect(Api::Token.find_by(token: old_token_hash)).to be_nil
       end
     end
 

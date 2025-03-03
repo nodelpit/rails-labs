@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :task do
+  factory :task, class: "Api::Task" do
     title { "Exemple de tâche" }
     description { "Description de la tâche" }
     completed { false }
