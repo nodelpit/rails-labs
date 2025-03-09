@@ -12,7 +12,7 @@
     "tailwindcss": "^4.0.3"
   },
   "scripts": {
-    "build": "esbuild app/javascript/*.* --bundle --sourcemap --format=esm --outdir=app/assets/builds --public-path=/assets",
+    "build": "esbuild app/javascript/*.* --bundle --sourcemap --format=esm --outdir=app/assets/builds --public-path=/assets --external:@hotwired/*",
     "postinstall": "yarn build"
   },
   "dependencies": {
