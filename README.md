@@ -1,24 +1,27 @@
-# README
+# Rails-Labs
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## 📝 Description
 
-Things you may want to cover:
+Rails-Labs est une application expérimentale modulaire où chaque "case" représente une fonctionnalité spécifique de Ruby on Rails. Cette approche compartimentée permet d'explorer, tester et démontrer différentes capacités du framework de manière isolée mais interconnectée.
 
-* Ruby version
+## 🧪 Concept
 
-* System dependencies
+Rails-Labs fonctionne comme un laboratoire d'expérimentation où chaque module est encapsulé dans sa propre "case". Grâce à l'utilisation des namespaces Rails, ces modules coexistent tout en maintenant leur indépendance, permettant une exploration ciblée des différentes fonctionnalités.
 
-* Configuration
+## 📦 Modules disponibles
 
-* Database creation
+- **🔐 Authentification** - Formulaires de connexion, inscription et récupération de mot de passe
+- **🤖 Chatbot** - Implementation d'un assistant conversationnel
+- **🔌 API** - Interface RESTful permettant la gestion de tâches (TODO) avec création, lecture, mise à jour et suppression
 
-* Database initialization
+## 🚀 Objectif
 
-* How to run the test suite
+Ce projet sert de terrain d'expérimentation et de démonstration pour différentes fonctionnalités de Rails. Il peut être utilisé comme référence pour implémenter ces fonctionnalités dans d'autres projets ou comme outil d'apprentissage pour explorer les capacités de Ruby on Rails.
 
-* Services (job queues, cache servers, search engines, etc.)
+## 💡 Extensibilité
 
-* Deployment instructions
+Rails-Labs est conçu pour être facilement extensible. De nouveaux modules peuvent être ajoutés sous forme de nouvelles "cases" pour explorer d'autres aspects du framework.
 
-* ...
+## 🛠️ Installation
+
+```bash
