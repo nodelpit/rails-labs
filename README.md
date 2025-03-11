@@ -21,7 +21,3 @@ Ce projet sert de terrain d'expérimentation et de démonstration pour différen
 ## 💡 Extensibilité
 
 Rails-Labs est conçu pour être facilement extensible. De nouveaux modules peuvent être ajoutés sous forme de nouvelles "cases" pour explorer d'autres aspects du framework.
-
-## 🛠️ Installation
-
-```bash
