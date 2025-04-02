@@ -1,10 +1,8 @@
 class Api::Token < ApplicationRecord
-  self.table_name = "api_tokens"
-
   belongs_to :user
   # Valide que les champs obligatoires sont présents
-  validates :token, presence: true, uniqueness: true
-  validates :expires_at, presence: true
+  validates :token, presence: { message: "Ce champ ne peut pas être vide" }, uniqueness: { message: "Ce token a déjà été utilisé" }
+  validates :expires_at, presence: { message: "La date d'expiration ne peut pas être vide" }
   attr_accessor :raw_token
 
   # Portée pour trouver facilement les tokens valides

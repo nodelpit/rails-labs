@@ -54,7 +54,7 @@ RSpec.describe User, type: :model do
     # Vérifie que les tokens existants sont révoqués
     it "révoque les tokens existants" do
       # Créer quelques tokens d'abord
-      3.times { ApiToken.create_for_user(user) }
+      3.times { Api::Token.create_for_user(user) }
       expect { user.generate_api_token }.to change { user.api_tokens.count }.from(3).to(1)
     end
 
@@ -81,7 +81,7 @@ RSpec.describe User, type: :model do
 
     # Vérifie que tous les tokens sont correctement supprimés
     it "supprime tous les tokens existants" do
-      3.times { ApiToken.create_for_user(user) }
+      3.times { Api::Token.create_for_user(user) }
       expect { user.revoke_all_api_tokens }.to change { user.api_tokens.count }.from(3).to(0)
     end
   end
