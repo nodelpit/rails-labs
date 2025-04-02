@@ -58,7 +58,7 @@ RSpec.describe "Api::V1::Bases", type: :request do
       # Vérifie le comportement avec un token expiré
       it "renvoie 'non autorisé' quand le token est expiré" do
         token_expire = SecureRandom.hex(32)
-        ApiToken.create!(
+        Api::Token.create!(
           user: user,
           token: Digest::SHA256.hexdigest(token_expire),
           expires_at: 1.day.ago
@@ -75,7 +75,7 @@ RSpec.describe "Api::V1::Bases", type: :request do
         ancien_token = token
 
         # Supprimer directement le token pour simuler la révocation
-        ApiToken.where(token: Digest::SHA256.hexdigest(ancien_token)).delete_all
+        Api::Token.where(token: Digest::SHA256.hexdigest(ancien_token)).delete_all
 
         # Vérifier que l'authentification échoue
         get api_v1_tasks_path, headers: { "X-Api-Token" => ancien_token }
