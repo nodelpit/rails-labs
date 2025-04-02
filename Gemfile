@@ -72,4 +72,4 @@ end
 
 gem "httparty"
 
-gem 'nokogiri', '1.18.4'
+gem "nokogiri", "1.18.4"
