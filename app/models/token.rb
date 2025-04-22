@@ -1,4 +1,4 @@
-class ApiToken < ApplicationRecord
+class Token < ApplicationRecord
   belongs_to :user
 
   # Valide que les champs obligatoires sont présents

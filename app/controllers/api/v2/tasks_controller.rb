@@ -1,4 +1,4 @@
-class Api::V1::TasksController < Api::V1::BaseController
+class Api::V2::TasksController < Api::V2::BaseController
   before_action :set_task, only: [ :show, :update, :destroy ]
   def index
     tasks = current_user.tasks
@@ -10,8 +10,8 @@ class Api::V1::TasksController < Api::V1::BaseController
   end
 
   def create
-    # Associer la nouvelle tâche à l'utilisateur authentifié
     task = current_user.tasks.build(task_params)
+
     if task.save
       render json: task, status: :created
     else
@@ -35,7 +35,6 @@ class Api::V1::TasksController < Api::V1::BaseController
   private
 
   def set_task
-    # Rechercher la tâche uniquement parmi les tâches de l'utilisateur courant
     @task = current_user.tasks.find(params[:id])
   rescue ActiveRecord::RecordNotFound
     render json: { error: "Tâche non trouvée" }, status: :not_found

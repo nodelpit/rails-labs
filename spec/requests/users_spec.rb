@@ -32,7 +32,7 @@ RSpec.describe User, type: :model do
     it { should have_many(:chatbot_conversations).class_name("Chatbot::Conversation") }
 
     # Vérifie l'association avec les tokens API et leur suppression en cascade
-    it { should have_many(:api_tokens).dependent(:destroy) }
+    it { should have_many(:tokens).dependent(:destroy) }
   end
 
   # Tests pour les rôles d'utilisateur
@@ -54,14 +54,14 @@ RSpec.describe User, type: :model do
     # Vérifie que les tokens existants sont révoqués
     it "révoque les tokens existants" do
       # Créer quelques tokens d'abord
-      3.times { ApiToken.create_for_user(user) }
-      expect { user.generate_api_token }.to change { user.api_tokens.count }.from(3).to(1)
+      3.times { Token.create_for_user(user) }
+      expect { user.generate_api_token }.to change { user.tokens.count }.from(3).to(1)
     end
 
     # Vérifie le format et la validité du token généré
     it "retourne un token valide" do
       token_record, raw_token = user.generate_api_token
-      expect(token_record).to be_a(Api::Token)
+      expect(token_record).to be_a(Token)
       expect(raw_token).to be_a(String)
       expect(raw_token.length).to eq(64) # 32 octets = 64 caractères hexadécimaux
     end
@@ -81,8 +81,8 @@ RSpec.describe User, type: :model do
 
     # Vérifie que tous les tokens sont correctement supprimés
     it "supprime tous les tokens existants" do
-      3.times { ApiToken.create_for_user(user) }
-      expect { user.revoke_all_api_tokens }.to change { user.api_tokens.count }.from(3).to(0)
+      3.times { Token.create_for_user(user) }
+      expect { user.revoke_all_api_tokens }.to change { user.tokens.count }.from(3).to(0)
     end
   end
 

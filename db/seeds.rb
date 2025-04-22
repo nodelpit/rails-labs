@@ -7,9 +7,17 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+if Task.count == 0
+  puts "Création de tâches de démo..."
+  user = User.first
 
-User.create!(
-  email: ENV['ADMIN_EMAIL'],
-  password: ENV['ADMIN_PASSWORD'],
-  role: :admin
-)
+  5.times do |i|
+    user.tasks.create!(
+      title: "Tâche exemple #{i+1}",
+      description: "Description de la tâche exemple #{i+1}",
+      completed: [ true, false ].sample
+    )
+  end
+end
+
+puts "Seed terminée avec succès !"

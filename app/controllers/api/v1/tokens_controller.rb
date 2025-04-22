@@ -7,7 +7,7 @@ class Api::V1::TokensController < Api::V1::BaseController
       _, raw_token = user.generate_api_token()
       render json: { api_token: raw_token, expires_in: 30.days.to_i }, status: :created
     else
-      render json: { error: "Invalid credentials" }, status: :unauthorized
+      render json: { error: "Identifiants invalides" }, status: :unauthorized
     end
   end
 

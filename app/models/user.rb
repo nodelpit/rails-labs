@@ -1,8 +1,8 @@
 class User < ApplicationRecord
   has_secure_password
   has_many :chatbot_conversations, class_name: "Chatbot::Conversation"
-  has_many :api_tokens, class_name: "Api::Token", dependent: :destroy
-  has_many :tasks, class_name: "Api::Task", dependent: :destroy
+  has_many :tokens, dependent: :destroy
+  has_many :tasks, dependent: :destroy
   # Définition de l'enum pour les rôles
   enum :role, { user: 0, admin: 1 }
   validates :email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }, uniqueness: true
@@ -14,13 +14,13 @@ class User < ApplicationRecord
     # Révoquer tous les tokens existants avant d'en générer un nouveau
     revoke_all_api_tokens
     # Créer un nouveau token à chaque appel
-    token, raw_token = Api::Token.create_for_user(self, expires_in)
+    token, raw_token = Token.create_for_user(self, expires_in)
     [ token, raw_token ]
   end
 
   # Révoquer tous les tokens existants
   def revoke_all_api_tokens
-    self.api_tokens.destroy_all
+    self.tokens.destroy_all
   end
 
   # Méthode pour vérifier l'accès API

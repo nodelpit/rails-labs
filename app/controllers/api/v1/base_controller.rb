@@ -7,7 +7,7 @@ class Api::V1::BaseController < ActionController::API
     # Récupérer le token de différentes sources
     api_token = session[:api_token] ||  request.headers["X-Api-Token"] ||  params[:api_token]
 
-    @current_user = Api::Token.find_user_by_token(api_token)
+    @current_user = Token.find_user_by_token(api_token)
 
     unless @current_user&.api_authorized?
       render json: {
