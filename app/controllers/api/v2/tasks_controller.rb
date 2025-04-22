@@ -23,7 +23,7 @@ class Api::V2::TasksController < Api::V2::BaseController
     if @task.update(task_params)
       render json: @task
     else
-      render json: { errors: task.errors.full_messages }, status: :unprocessable_entity
+      render json: { errors: @task.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
@@ -37,7 +37,7 @@ class Api::V2::TasksController < Api::V2::BaseController
   def set_task
     @task = current_user.tasks.find(params[:id])
   rescue ActiveRecord::RecordNotFound
-    render json: { error: "Tâche non trouvée" }, status: :no_found
+    render json: { error: "Tâche non trouvée" }, status: :not_found
   end
 
   def task_params
