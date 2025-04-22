@@ -38,7 +38,7 @@ class Api::V1::TasksController < Api::V1::BaseController
     # Rechercher la tâche uniquement parmi les tâches de l'utilisateur courant
     @task = current_user.tasks.find(params[:id])
   rescue ActiveRecord::RecordNotFound
-    render json: { error: "Task not found" }, status: :not_found
+    render json: { error: "Tâche non trouvée" }, status: :not_found
   end
 
   def task_params

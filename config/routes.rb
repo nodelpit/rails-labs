@@ -33,14 +33,24 @@ Rails.application.routes.draw do
     resources :users
   end
 
+  # Routes pour l'API
   namespace :api do
+    namespace :v2 do
+      # Routes d'authentification
+      post "auth/login", to: "auth#login"
+      post "auth/refresh", to: "auth#refresh"
+
+      # Routes de tâches (RESTful)
+      resources :tasks
+    end
+
     namespace :v1 do
       # Routes d'authentification API
       post "token", to: "tokens#create"
       delete "token", to: "tokens#destroy"
 
-      # Routes de tâches API (sans new et edit qui sont inutiles en API)
-      resources :tasks, except: [ :new, :edit ]
+      # Routes de tâches (RESTful)
+      resources :tasks
     end
   end
 end
