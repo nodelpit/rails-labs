@@ -54,7 +54,7 @@ RSpec.describe Api::V2::AuthController, type: :request do
     context "avec un token valide" do
       it "révoque l'ancien token et génère un nouveau token" do
         # Garder une trace du jti original pour vérifier qu'il est révoqué
-        original_jti = decoded_token[:jti]
+        decoded_token[:jti]
 
         # Appeler l'endpoint de rafraîchissement
         post api_v2_auth_refresh_path, headers: { "Authorization" => "Bearer #{token}" }
