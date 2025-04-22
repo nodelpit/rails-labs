@@ -13,6 +13,7 @@ Rails-Labs fonctionne comme un laboratoire d'expérimentation où chaque module 
 - **🔐 Authentification** - Formulaires de connexion, inscription et récupération de mot de passe
 - **🤖 Chatbot** - Implementation d'un assistant conversationnel
 - **🔌 API** - Interface RESTful permettant la gestion de tâches (TODO) avec création, lecture, mise à jour et suppression
+- **API V2** - Ajout de l'authentification JWT sur la version 2 de l'API
 
 ## 🚀 Objectif
 
