@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_02_150203) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_08_101545) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -28,6 +28,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_02_150203) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["conversation_id"], name: "index_chatbot_messages_on_conversation_id"
+  end
+
+  create_table "jwt_tokens", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "jti"
+    t.datetime "exp"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["jti"], name: "index_jwt_tokens_on_jti"
+    t.index ["user_id"], name: "index_jwt_tokens_on_user_id"
   end
 
   create_table "tasks", force: :cascade do |t|
@@ -64,6 +74,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_02_150203) do
 
   add_foreign_key "chatbot_conversations", "users"
   add_foreign_key "chatbot_messages", "chatbot_conversations", column: "conversation_id"
+  add_foreign_key "jwt_tokens", "users"
   add_foreign_key "tasks", "users"
   add_foreign_key "tokens", "users"
 end
